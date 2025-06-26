@@ -201,14 +201,14 @@ OnNameTeach
 			{
 				tempname = SUBSTR(reference0,0,3)
 				username = tempname
-				"\0\s[0]\i[1]Ah, \w2\s[18]*you know names this long are out of our budget, \w2\s[17]\i[2]so we have to do some budget cuts! \w8\w1\s[20]\i[2]Shortening your unessesarily long name to three letters, \w2we get \w2\s[6]%(username)!!\w8\w1\s[13] I hope you're satisfied with that change!\n[Cut letters will not be refunded]\e"
+				"\![leave,passivemode]\0\s[0]\i[1]Ah, \w2\s[18]*you know names this long are out of our budget, \w2\s[17]\i[2]so we have to do some budget cuts! \w8\w1\s[20]\i[2]Shortening your unessesarily long name to three letters, \w2we get \w2\s[6]%(username)!!\w8\w1\s[13] I hope you're satisfied with that change!\n[Cut letters will not be refunded]\e"
 				//change this dialogue to whatever you like.
 			}
 			else
 			{
 				tempname = TOUPPER(tempname)
 				username = tempname
-				"\0\s[13]\i[1]*Wonderful! \w8\w1\s[11]\i[1]Viewers, give it up for \w3\s[3]%(username)!!!\e"
+				"\![leave,passivemode]\0\s[13]\i[1]*Wonderful! \w8\w1\s[11]\i[1]Viewers, give it up for \w3\s[3]%(username)!!!\e"
 			}
 		}
 	}

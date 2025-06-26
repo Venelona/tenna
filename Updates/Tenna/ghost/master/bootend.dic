@@ -66,7 +66,7 @@ OnFirstBoot : all
 	nowshell = "master" //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
 	//firstboot = 1 //This marks that this is the first time you've run the ghost. It's so it won't reroute to general name changing dialogue when the user inputs their name. Uncomment this if you're going to have your ghost ask the user directly when they're first booted for the user's name.
 	notatv = 0
-	namefirst = 1
+	namefirst = 0
 	tvwatch = 0
 	tvtogether = 0
 	timecheck = 1
@@ -93,7 +93,7 @@ OnFirstBoot : all
 		//Always make sure to keep your dialogue in the quotation marks! And remember, you can't use quotation marks IN dialogue either. You can use two single apostrophes instead if you must.
 		//Note also the use of the \x and \c tags. Read more about them in the intermediate SakuraScript section of the walkthrough if you're curious.
 		
-		"\![enter,passivemode]\0\s[10].\w5.\w5.\w5.\w5.\w5.\w5.\w8\w8\n\n[half]*(It's an old TV. \w8\w8Seems like it's still working. \w8\w8Turn it on?)\w8\w8\w2\n\n[half]\_q\![*]\q[Yes,openact]   \![*]\q[No,closeact]"
+		"\![enter,passivemode]\0\s[29].\w5.\w5.\w5.\w5.\w5.\w5.\w8\w8\n\n[half]*(It's an old TV. \w8\w8Seems like it's still working. \w8\w8Turn it on?)\w8\w8\w2\n\n[half]\_q\![*]\q[Yes,openact]   \![*]\q[No,closeact]"
 		
 		//"\1\s[10]\0\s[0]Hello, and welcome to the Girl and Triangle Ghost Template. \w5My name is Girl, and that's Triangle over there.\w8\1\s[10]Sup. \w8\0\s[0]\n\n[half]If you downloaded this template, you are presumably interested in making a ghost. \w5This template has been designed to help you do that. \w5Please make sure to carefully read the included readme file. \w8\1\n\n[half]\s[10]Each of the .dic files you'll be editing has a lot of commentary to guide you.\w8\0\s[0]\n\n[half]In the future, you will be replacing this dialogue with the dialogue for your own ghost. \w5This is a good place to introduce your characters.\w8\1\n\n[half]\s[10]You can have your characters banter with each other and explain how the ghost works and how to access menus.\x\c\0\s[0]More details about dialogue coding will be in the walkthrough page.\w8\1\c\s[10]You can direct the user to the config menu to set their name and pronouns by hand, or you can add the questions directly in this first boot sequence if you want. Good luck with your future ghost!\e"
 		

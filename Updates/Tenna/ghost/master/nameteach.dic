@@ -1,0 +1,306 @@
+﻿//---------------------------The User's Name--------------------------
+//This .dic file has to do with setting the user's name and suffix/prefix (optional). You may recall some of the functions mentioned here from bootend.dic. As you can see, you can spread functions across multiple .dic files if you like! Just remember my note in bootend.dic about the different between OnFunction and Function.
+
+//This file is fairly short, so don't worry! It shouldn't take you too long to finish.
+
+//Make sure to read the walkthrough (http://www.ashido.com/ukagaka/walkthrough.html) for more details about how to properly format ghost dialogue!
+//I will reiterate that you should be editing these in Notepad++, and in particular, you should set the Language to C (or Java I guess) to properly highlight all the text. It will make things A LOT EASIER for you, trust me! It will also help you keep track of your brackets in case you forget some. If you click on a line with a bracket in Notepad++, it should highlight where the other bracket ends, or turn purple if there's no finishing bracket (which you should definitely fix!)
+//It will also highlight my commented lines in green, so you'll know where they are. Any line beginning with // is a commented line that the code will not read. It's just for your reference!
+
+//If you see a big block of commented text you want to uncomment, highlight the text and then hit ctrl-shift-k in Notepad++ and that should uncomment it. Mostly this is intended for advanced users.
+
+
+//--OnTeachName
+//This is called from the config menu in the main character's double click menu when the user says they want to change their name. If you look in menu.dic you'll see the code leading to here.
+
+OnTeachName	
+{
+	if reference0 == "TEACHNAME" //ignore this
+		{
+		"\0\s[13]\i[1]Oh, \w2dissatisfied with your name? \w8\w1\s[17]\i[1]No problem, \w2here on TV we can \s[6]ADR anything and \s[6]edit everything! \w8\w1\s[11]Do tell how you'd like to be called!\s[24]\![open,inputbox,OnNameTeach,-1]\e"
+		//This is the bit of dialogue you can rewrite if you want. Note that this line ends with \![open,inputbox,OnNameTeach,-1]. You may recognize this from bootend.dic. Essentially, this will lead to the next function. Make sure you don't delete that tag! The rest you can do whatever with though.
+		}
+	else
+		{
+		//This else statement is empty, and I'm mostly pointing this out to mention that you can do this too with your if/elses if you want! An empty else will simply cause your ghost not to do anything. I wouldn't get too crazy with this though.
+		}
+}
+
+
+//--OnNameTeach
+//This is where the user inputs their name and the ghost analyzes it. If you want your ghost to have specific responses to certain names, this is where you would add them. If not, you can blank OnNameTeach and just leave these three lines in there.
+
+//OnNameTeach
+// {
+	//tempname = reference0
+	//username = tempname
+	//"\0\s[0]The user is now called %(username).\e"
+// }
+
+//For this template, we're going to check at least for the user having the same name as Girl or Triangle and if the user puts in a valid name.
+
+OnNameTeach
+{
+	tempname = reference0 //this stores the name value from reference0 in tempname
+	
+	
+	reference0 = TOUPPER(reference0) //changes it to lowercase
+	reference0 = REPLACE(reference0," ","") //removes spaces
+	reference0 = REPLACE(reference0,".","") //removes periods
+	reference0 = REPLACE(reference0,"-","") //removes dashes
+	//tempname = SUBSTR(reference0,0,3)
+	
+	
+	//Those extra TOLOWER/REPLACE things up there basically clean up the user's input so you don't have to check for Girl, GIRL, girl, GiRl, etc. It'll make it much easier to check for any specific name, since you won't have to account for any edge cases. Note that the names you will be checking for should be in all lowercase, however.
+	//\![open,inputbox,OnNameTeach,-1]
+	if namefirst == 1
+	{
+		if reference0 == "KRIS" || reference0 == "TORIEL" || reference0 == "ASGORE" || reference0 == "ASRIEL"
+		{
+			tempname = SUBSTR(reference0,0,3)
+			username = tempname
+			"\0\s[13]*What an interesting coincidink! \w8\w1\s[15]That's\nthe name of one of my previous loyal viewers! \w8\w1\s[16]Well, \w1\f[sub,true]perhaps loyal is a wrong word,\f[sub,false] \w2\s[7]\i[2]but nontheless!\w8\w1\s[6] New home, \w2\s[6]new audience, \w2\s[6]new eyes to peer at my not-old-still-very-much-useful-and-handsome face!\e"
+		}
+		elseif reference0 == "NOELLE" || reference0 == "DESS" || reference0 == "DECEMBER" || reference0 == "CAROL" || reference0 == "RUDY" || reference0 == "RUDOLPH"
+		{
+			tempname = SUBSTR(reference0,0,3)
+			username = tempname
+			"\0\s[13]\i[1]*Ah, \w2\s[15]I knew another deer individual in the past. \w8\w1\s[0]\i[1]One of my past viewers! \w8\w1\s[12]So many good memories! \w8\w4\s[14]Not as many as there could've been since she didn't tune in that often, \w2\s[11]but I'm sure \w2you\w2 won't be like that!\e"
+		}
+		elseif reference0 == "SUSIE"
+		{
+			tempname = SUBSTR(reference0,0,3)
+			username = tempname
+			"\0\s[7]\i[1]*Ah, \w3\s[12]my darling saviour and re-home-r also goes by that name! \w8\w1\s[13]I hope you treat me with the same gentleness\w2[?] as she did!\e"
+		}
+		elseif reference0 == "RALSEI"
+		{
+			tempname = SUBSTR(reference0,0,3)
+			username = tempname
+			"\0\s[17]*Interesting twist, \w2folks, \w2we have a three-time accidental fluffiest pet contest winner impersonator! \w8\w1\s[11]\i[1]You are not nearly as fluffy! \w8\w1\s[13]\i[1]But do not worry, \w2\s[18]it's not anything we can't fix in post.\e"
+		}
+		elseif reference0 == "MIKE"
+		{
+			"\0\s[0]\i[1]*Sorry,\w2 but MIKE position is already occupied. \w8\w1\s[18]If he gets fired, \w2I'll let you know, \w3\s[0]\i[1]\w3\s[0]but for now please give me a name that I can employ or already fired!\w6\![open,inputbox,OnNameTeach,-1]"
+		}
+		elseif reference0 == "TENNA" || reference0 == "ANTTENNA" || reference0 == "TENNAANT" || reference0 == "ANT"
+		{
+			"\0\s[13]*That's my name, \w2you silly goose! \w8\w1\s[15]We don't want to confuse our darling audience, \w2do we?\w6\![open,inputbox,OnNameTeach,-1]"
+		
+		}
+		elseif reference0 == "BITCH" || reference0 == "SLUT" || reference0 == "FUCK" || reference0 == "SHIT" || reference0 == "DUMBASS" || reference0 == "FUCKFACE" || reference0 == "KYS"
+		{
+			"\0\s[0]*Oh, \w2censors will surely kill me!\w8\w1\s[20] Please,\w2 think of my poor ad revenue!\w6\![open,inputbox,OnNameTeach,-1]"
+		
+		}
+		elseif reference0 == "ASS"
+		{
+			"\0\s[8]*Not letting this one slip past the censors again!\w6\![open,inputbox,OnNameTeach,-1]"
+		
+		}
+		elseif reference0 == ""//This is if the user doesn't put in a name at all, since that'd also get awkward in dialogue.
+		{
+			username = "GUY" //this sets the user's name to USER.
+			"\0\s[19]*Folks, \w2we got a really shy one here! \w8\w1\s[0]\i[1]Don't worry, \w2dear viewer, \w2\s[13]nothing we can't work with! \w8\w1\s[11]If you don't have any name in that oddly-shaped head of yours, \w2you shall be called \w2\i[1]GUY!\e"
+			//You can change this snip to whatever.
+		}
+		else
+		{
+			if STRLEN(reference0)>=4
+			{
+				tempname = SUBSTR(reference0,0,3)
+				username = tempname
+				"\0\s[0]\i[1]*Ah, \w2\s[18]you know names this long are out of our budget, \w2\s[17]\i[2]so we have to do some budget cuts! \w8\w1\s[20]\i[2]Shortening your unessesarily long name to three letters, \w2we get \w2\s[6]%(username)!!\w8\w1\s[13] I hope you're satisfied with that change!\n[Cut letters will not be refunded]\e"
+				//change this dialogue to whatever you like.
+			}
+			else
+			{
+				username = tempname
+				"\0\s[13]\i[1]*Wonderful! \w8\w1\s[11]\i[1]Viewers, give it up for \w3\s[3]%(username)!!!\e"
+			}
+		}
+	}
+	else //if the user put in something not specified above, ie a proper name the ghost can use. 
+	{
+		if namefirst == 0
+		{
+			if reference0 == "KRIS" || reference0 == "TORIEL" || reference0 == "ASGORE" || reference0 == "ASRIEL"
+			{
+				tempname = SUBSTR(reference0,0,3)
+				username = tempname
+				namefirst = 1
+				"\![leave,passivemode]\0\s[13]*What an interesting coincidink! \w8\w1\s[15]That's\nthe name of one of my previous loyal viewers! \w8\w1\s[16]Well, \w1\f[sub,true]perhaps loyal is a wrong word,\f[sub,false] \w2\s[7]\i[2]but nontheless!\w8\w1\s[6] New home, \w2\s[6]new audience, \w2\s[6]new eyes to peer at my not-old-still-very-much-useful-and-handsome face!\x\s[4]Now, I hope you enjoy our marvelous TV show, \w2\s[6]and remember\w3 - \s[11]don't touch that dial!\x\i[2]\f[color,253,51,42]\f[bold,true]It's\f[color,255,255,2]!!\w8\w8\w8 \f[color,253,51,42]T\w8\w6V\f[color,255,255,2]!! \w8\w8\w8\f[color,253,51,42]TIME\f[color,255,255,2]!!!\f[color,default]\f[bold,false]\e"
+				//Note here that it's using the same tag as above to reopen the text box to let the user put in another name. You can replace the dialogue with whatever as long as you keep the \![open,inputbox,OnNameTeach,-1] tag.
+			}
+			elseif reference0 == "NOELLE" || reference0 == "DESS" || reference0 == "DECEMBER" || reference0 == "CAROL" || reference0 == "RUDY" || reference0 == "RUDOLPH"
+			{
+				tempname = SUBSTR(reference0,0,3)
+				username = tempname
+				namefirst = 1
+				"\![leave,passivemode]\0\s[13]\i[1]*Ah, \w2\s[15]I knew another deer individual in the past. \w8\w1\s[0]\i[1]One of my past viewers! \w8\w1\s[12]So many good memories! \w8\w4\s[14]Not as many as there could've been since she didn't tune in that often, \w2\s[11]but I'm sure \w2you\w2 won't be like that!\x\s[4]*Now, I hope you enjoy our marvelous TV show, \w2\s[6]and remember\w3 - \s[11]don't touch that dial!\x\i[2]\f[color,253,51,42]\f[bold,true]It's\f[color,255,255,2]!!\w8\w8\w8 \f[color,253,51,42]T\w8\w6V\f[color,255,255,2]!! \w8\w8\w8\f[color,253,51,42]TIME\f[color,255,255,2]!!!\f[color,default]\f[bold,false]\e"
+		
+			}
+			elseif reference0 == "SUSIE"
+			{
+				tempname = SUBSTR(reference0,0,3)
+				username = tempname
+				namefirst = 1
+				"\![leave,passivemode]\0\s[7]\i[1]*Ah, \w3\s[12]my darling saviour and re-home-r also goes by that name! \w8\w1\s[13]I hope you treat me with the same gentleness\w2[?] as she did!\x\s[4]*Now, I hope you enjoy our marvelous TV show, \w2\s[6]and remember\w3 - \s[11]don't touch that dial!\x\i[2]\f[color,253,51,42]\f[bold,true]It's\f[color,255,255,2]!!\w8\w8\w8 \f[color,253,51,42]T\w8\w6V\f[color,255,255,2]!! \w8\w8\w8\f[color,253,51,42]TIME\f[color,255,255,2]!!!\f[color,default]\f[bold,false]\e"
+			}
+			elseif reference0 == "RALSEI"
+			{
+				tempname = SUBSTR(reference0,0,3)
+				username = tempname
+				namefirst = 1
+				"\![leave,passivemode]\0\s[17]*Interesting twist, \w2folks, \w2we have a three-time accidental fluffiest pet contest winner impersonator! \w8\w1\s[11]\i[1]You are not nearly as fluffy! \w8\w1\s[13]\i[1]But do not worry, \w2\s[18]it's not anything we can't fix in post.\x\s[4]*Now, I hope you enjoy our marvelous TV show, \w2\s[6]and remember\w3 - \s[11]don't touch that dial!\x\i[2]\f[color,253,51,42]\f[bold,true]It's\f[color,255,255,2]!!\w8\w8\w8 \f[color,253,51,42]T\w8\w6V\f[color,255,255,2]!! \w8\w8\w8\f[color,253,51,42]TIME\f[color,255,255,2]!!!\f[color,default]\f[bold,false]\e"
+			}
+			elseif reference0 == "MIKE"
+			{
+				"\0\s[0]\i[1]*Sorry,\w2 but MIKE position is already occupied. \w8\w1\s[18]If he gets fired, \w2I'll let you know, \w3\s[0]\i[1]\w3\s[0]but for now please give me a name that I can employ or already fired!\w6\![open,inputbox,OnNameTeach,-1]"
+			}
+			elseif reference0 == "TENNA" || reference0 == "ANTTENNA" || reference0 == "TENNAANT" || reference0 == "ANT"
+			{
+				"\0\s[13]*That's my name, \w2you silly goose! \w8\w1\s[15]We don't want to confuse our darling audience, \w2do we?\w6\![open,inputbox,OnNameTeach,-1]"
+		
+			}
+			elseif reference0 == "BITCH" || reference0 == "SLUT" || reference0 == "FUCK" || reference0 == "SHIT" || reference0 == "DUMBASS" || reference0 == "FUCKFACE" || reference0 == "KYS"
+			{
+				"\0\s[0]*Oh, \w2censors will surely kill me!\w8\w1\s[20] Please,\w2 think of my poor ad revenue!\w6\![open,inputbox,OnNameTeach,-1]"
+		
+			}
+			elseif reference0 == "ASS"
+			{
+				"\0\s[8]*Not letting this one slip past the censors again!\w6\![open,inputbox,OnNameTeach,-1]"
+		
+			}
+			elseif reference0 == "" //This is if the user doesn't put in a name at all, since that'd also get awkward in dialogue.
+			{
+				username = "GUY" //this sets the user's name to USER.
+				namefirst = 1
+				"\![leave,passivemode]\0\s[19]*Folks, \w2we got a really shy one here! \w8\w1\s[0]\i[1]Don't worry, \w2dear viewer, \w2\s[13]nothing we can't work with! \w8\w1\s[11]If you don't have any name in that oddly-shaped head of yours, \w2you shall be called \w2\i[1]GUY!\x\s[4]*Now, I hope you enjoy our marvelous TV show, \w2\s[6]and remember\w3 - \s[11]don't touch that dial!\x\i[2]\f[color,253,51,42]\f[bold,true]It's\f[color,255,255,2]!!\w8\w8\w8 \f[color,253,51,42]T\w8\w6V\f[color,255,255,2]!! \w8\w8\w8\f[color,253,51,42]TIME\f[color,255,255,2]!!!\f[color,default]\f[bold,false]\e"
+			//You can change this snip to whatever.
+			}
+			elseif STRLEN(reference0)>=4
+			{
+				tempname = SUBSTR(reference0,0,3)
+				username = tempname
+				namefirst = 1
+				"\![leave,passivemode]\0\s[0]\i[1]*What a wonderfully-long name! \w8\w1\i[1]Too long, \w2in fact!!\w8\w1\s[13] We can only afford three-letter-long names for our contestants, \w1\s[17]\i[1]so you'll have to work with %(username)!! \w8\w1\s[3]Incredible!!! \w8\w8\s[4]I hope you enjoy our marvelous TV show, \w2\s[6]and remember\w3 - \s[11]don't touch that dial!\x\i[2]\f[color,253,51,42]\f[bold,true]It's\f[color,255,255,2]!!\w8\w8\w8 \f[color,253,51,42]T\w8\w6V\f[color,255,255,2]!! \w8\w8\w8\f[color,253,51,42]TIME\f[color,255,255,2]!!!\f[color,default]\f[bold,false]\e"
+			}
+			else
+			{
+				tempname = TOUPPER(tempname)
+				username = tempname
+				namefirst = 1
+				"\![leave,passivemode]\0\s[7]\i[1]*Short and sweet! \w8\w1\i[1]Unlike my nose! \w8\w1Everyone, \w2\s[3]give it up for %(username)!! \w8\w8\w4\s[4]I hope you enjoy our marvelous TV show, \w2\s[6]and remember\w3 - \s[11]don't touch that dial!\x\i[2]\f[color,253,51,42]\f[bold,true]It's\f[color,255,255,2]!!\w8\w8\w8 \f[color,253,51,42]T\w8\w6V\f[color,255,255,2]!! \w8\w8\w8\f[color,253,51,42]TIME\f[color,255,255,2]!!!\f[color,default]\f[bold,false]\e"
+			}
+		}
+		else
+		{
+			if STRLEN(reference0)>=4
+			{
+				tempname = SUBSTR(reference0,0,3)
+				username = tempname
+				"\0\s[0]\i[1]Ah, \w2\s[18]*you know names this long are out of our budget, \w2\s[17]\i[2]so we have to do some budget cuts! \w8\w1\s[20]\i[2]Shortening your unessesarily long name to three letters, \w2we get \w2\s[6]%(username)!!\w8\w1\s[13] I hope you're satisfied with that change!\n[Cut letters will not be refunded]\e"
+				//change this dialogue to whatever you like.
+			}
+			else
+			{
+				tempname = TOUPPER(tempname)
+				username = tempname
+				"\0\s[13]\i[1]*Wonderful! \w8\w1\s[11]\i[1]Viewers, give it up for \w3\s[3]%(username)!!!\e"
+			}
+		}
+	}
+}
+
+//The rest of this is for advanced users who want to add titles to their user's names. If you're not interested, you can ignore this and move on to another file.
+
+
+//*********************Advanced User Info*******************************
+	//If you want to let your user add a title to their name, like Lady or Master, then you'll want to expand this section a little. This check would go AFTER the check above for a valid name, leading to further choices instead of setting the name. So you'd want to uncomment and put in the else above...
+	
+	// {
+		// "\0\s[0]Do you want a title?\w4\n\n[half]\![*]\q[Nope,titlenone]\n"
+		// //You can replace "\0\s[0]Do you want a title?", but don't touch the rest of it.
+		// --
+		// if presuffix == "masculine" //this value was defined in bootend.dic and menu.dic when the user chose their pronouns. Thus, if someone chose he/him pronouns, they would be able to choose Mr. or Master. If the user hasn't set their pronouns, or that's not a feature of your ghost, you can just put all the choices together without these presuffix checks and let the user decide from all.
+		// {
+		// "\![*]\q[Mr.,titlemr]\n/
+		// \![*]\q[Master,titlemaster]\n"
+		// }
+		// elseif presuffix == "feminine" //Likewise, if someone chose she/her pronouns, they could choose Ms. or Lady.
+		// {
+		// "\![*]\q[Ms.,titlems]\n/
+		// \![*]\q[Lady,titlelady]\n"
+		// }
+		// -- //the titles after this are gender neutral and will appear for all users. If you want to remove the masculine and feminine titles entirely, just delete from the curly bracket one line up to the double dashes above "if presuffix == "masculine". That should leave only the neutral titles. Make sure to leave a set of double dashes above the neutral titles though. You can also just put the feminine and masculine titles in here too if you want all titles to be available to all users at all times.
+		// "\![*]\q[-ssi,titlessi]\n/
+		// \![*]\q[-san,titlesan]\e"
+		// //Note that the final line here ends with \e instead of \n/, since it is the final option. Make sure your final option (and ONLY your final option) always ends with \e. More on that in the box below.
+	// }
+	//Adding new titles for your users to use is simply a matter of copy and pasting creatively. You can see how the ghost puts together the title and your name in the Select. sections below. Above, you simply need to add a new option and link it to a new Select. For example, you could add "\![*]\q[Mistress,titlemistress]\n/" between Ms. and Lady up there, then write up a Select.titlemistress below that fits the pattern of the others.
+	//***********************************************************************
+	
+	//The following Select.title[word] functions add the title to the user's name, then go to the final step, NameDone. You don't have to touch any of these. Advanced users, notice how these match the linked functions in the choices above.
+	
+Select.titlenone
+{
+		username = tempname
+		NameDone
+}
+
+Select.titlemr
+{
+		username = "Mr. " + tempname
+		NameDone
+}
+
+Select.titlemaster
+{
+		username = "Master " + tempname
+		NameDone
+}
+		
+Select.titlems
+{
+		username = "Ms. " + tempname
+		NameDone
+}
+
+Select.titlelady
+{
+		username = "Lady " + tempname
+		NameDone
+}
+
+Select.titlessi
+{
+		username = tempname + "-ssi"
+		NameDone
+}
+
+Select.titlesan
+{
+		username = tempname + "-san"
+		NameDone
+}
+
+//--NameDone
+//This is the final bit of dialogue your ghosts will have when the user changes their name and adds a title above. There is a special section here for when the user first boots the ghost, if you uncommented that in bootend.dic. If you aren't doing either of those things, then you can ignore this.
+
+NameDone
+{
+	if firstboot == 1 //this checks for the flag that was set during the firstboot sequence
+	{
+		firstboot = 0 //this turns the flag off
+		
+		//This dialogue will display the first time the user puts in their name. You might want to add some closing thoughts to the introduction your ghost had in OnFirstBoot, or directions about how to use the ghost, or something like that. It's up to you!
+		"\0\s[0]Thank you for inputting your name for the first time, %(username).\w8\1\s[10]Good luck on finishing your ghost!\e"
+	}
+	else
+	{
+	"\0\s[0]The user is now called %(username).\e"
+	//Rewrite this as you like. Note the %(username) tag here, as you should be well familiar with by now from the walkthrough and the other .dic files. That will display the name the user just created.
+	}	
+}

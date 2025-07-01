@@ -303,7 +303,7 @@ RandomTalk : nonoverlap_pool
 			"\0\s[28]*What is \w2THAT?!?\i[7]\e"
 			"\0\s[26]*This is getting GLOOBY!!\i[7]\e"
 			"\0\s[26]*Feels like watching Glob Noss!\i[7]\e"
-			"\0\s[26]*%(username), \w2careful with your pen there, \w2\s[25]\i[1]we don't \s[25]want to get demonatized now!\i[7]\e"
+			"\0\s[26]*%(username), \w2careful with your pen there, \w2\s[25]\i[1]we don't \s[25]want to get demonetized now!\i[7]\e"
 			"\0\s[26]*You erased THAT??\i[7]\e"
 			"\0\s[25]*Maybe you can draw a handsome TV show host next!!\i[7]\e"
 			"\0\s[28]*This would look better with a neon yellow tie!!\i[7]\e"

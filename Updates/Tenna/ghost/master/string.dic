@@ -46,22 +46,18 @@ On_sakura.recommendsites
  {
 	"Venelona's Tumblr"
 	--
-	//This first line is the name that will display in the menu for your site. In this case, it would display "Ghost Template Walkthrough".
-	"%ASC(1)https://venelona.tumblr.com/"
-	--
-	//And this is the site that it would link to. Note that a website address begins with %ASC(1) and ends with %ASC(2). Don't forget these!
-	
-	"Venelona's Bluesky"
-	--
-	"%ASC(1)https://bsky.app/profile/venelona.bsky.social"
+	"%ASC(1)https://venelona.tumblr.com/%ASC(2)"
 	--
 	
-	"Venelona's Boosty (donations)"
+	"Venelona's Twitter"
 	--
-	"%ASC(1)https://boosty.to/venelona"
+	"%ASC(1)https://twitter.com/Venelona/%ASC(2)"
 	--
 	
-	
+	"Venelona's Boosty"
+	--
+	"%ASC(1)https://boosty.to/venelona/%ASC(2)"
+	--
  }
  
 //---- The second option from the top's caption -----------------------------------------

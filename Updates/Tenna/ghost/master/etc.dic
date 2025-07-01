@@ -327,7 +327,7 @@ OnUpdateComplete
  {
 	if reference0 == "none" //if the ghost had nothing to update with
  	{
- 		"\0\s[14]\i[1]*Oh. \w8\w4False alarm. \w8\w4\s[0]MIKE, \w2RERUN THE OLD EPISODES!!\e"
+ 		"\0\s[14]\i[1]*Oh. \w8\w4No new programs. \w8\w4False alarm. \w8\w4\s[0]MIKE, \w2RERUN THE OLD EPISODES!!\e"
 	}
  	else //if the ghost has updated successfully
 	{
@@ -502,7 +502,7 @@ OnHeadlinesenseFailure
  
 OnUpdatedataCreating
  {
-	"\0\s[0]\i[1]*MIKE, \W2GIVE ME A NEW updates2.dau FILE!!!\e"
+	"\0\s[0]\i[1]*MIKE, \w2GIVE ME A NEW updates2.dau FILE!!!\e"
  }
 
  //---- OnUpdatedataCreated -------------------------------------------------------------
@@ -518,7 +518,7 @@ OnUpdatedataCreated
  
 OnNarCreating
  {
-	"\0\s[0]\i[1]*MIKE, GIVE ME A NEW .nar FILE!!!\e"
+	"\0\s[0]\i[1]*MIKE, \w2GIVE ME A NEW .nar FILE!!!\e"
  }
 
  //---- OnNarCreated -------------------------------------------------------------------
@@ -526,7 +526,7 @@ OnNarCreating
  
 OnNarCreated
  {
-	"\0\s[8]\i[1]*FOR YOU, \w2TODAY ONLY, \w2\i[1]A BRAND! \w8\w4\i[1]NEW!! \w8\w4\s[6]'%(reference0)'!!!!!!\e"
+	"\0\s[8]\i[1]*FOR YOU, \w2TODAY ONLY, \w2\i[1]A BRAND! \w8\w4\i[1]NEW!!\n\w8\w4\s[6]'%(reference0)'!!!!!!\e"
 	//reference0 here will be the filename of the nar you just created. It should drop the nar in the folder where all your ghosts are listed, ssp\ghost\.
  }
 
